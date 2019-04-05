@@ -20,7 +20,7 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      retry(5),
+      retry(5), // retry for five times before sending error response
       catchError((error: HttpErrorResponse) => {
         const notificationService = this.injector.get(NotificationService);
 
