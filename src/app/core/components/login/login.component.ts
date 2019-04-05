@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../services/notification/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   // INITIALIZE FORM CONTROLS
-  async initForm() {
+  async initForm(): Promise<any> {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: [
@@ -34,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   // ON LOGIN BUTTON PRESS, EXECUTE FUNCTION
-  async onLogin() {
+  async onLogin(): Promise<any> {
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
       return;
@@ -42,11 +43,10 @@ export class LoginComponent implements OnInit {
 
     console.log('login button pressed!');
     this.isSubmitted = false;
-    console.log(this.loginForm.value);
   }
 
   // LIFECYCLE HOOK, RUN ON START
-  ngOnInit() {
-    this.initForm(); // INITIALIZE FORM
+  async ngOnInit(): Promise<any> {
+    await this.initForm(); // INITIALIZE FORM
   }
 }

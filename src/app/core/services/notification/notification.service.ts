@@ -8,8 +8,8 @@ export class NotificationService {
   constructor(private snackbar: MatSnackBar) {}
 
   // NOTIFY USER BY SHOWING MESSAGE IN SNACKBAR
-  async notify(message) {
-    this.snackbar.open(message, '', {
+  async notify(message: string): Promise<any> {
+    this.snackbar.open(message, null, {
       duration: 4000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
