@@ -10,6 +10,7 @@ import { CoreRoutingModule } from './core-routing.module';
 
 // ALL COMPONENTS IMPORTS
 import { LoginComponent } from './components/login/login.component';
+import { ErrorModule } from './error/error.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { LoginComponent } from './components/login/login.component';
     FlexLayoutModule,
     CoreRoutingModule,
     MaterialModule,
+    ErrorModule,
   ],
   declarations: [LoginComponent],
 })
