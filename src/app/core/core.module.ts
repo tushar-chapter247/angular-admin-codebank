@@ -8,8 +8,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material/material.module';
 import { CoreRoutingModule } from './core-routing.module';
 
+// ALL COMPONENTS IMPORTS
+import { LoginComponent } from './components/login/login.component';
+
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,5 +22,6 @@ import { CoreRoutingModule } from './core-routing.module';
     CoreRoutingModule,
     MaterialModule,
   ],
+  declarations: [LoginComponent],
 })
 export class CoreModule {}
