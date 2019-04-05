@@ -1,3 +1,74 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <form
+    #form="ngForm"
+    [formGroup]="loginForm"
+    (ngSubmit)="onLogin()"
+    novalidate
+  >
+    <mat-card class="center">
+      <mat-card-title class="card-title">
+        <strong>LOGIN</strong>
+      </mat-card-title>
+
+      <mat-card-content>
+        <p>
+          <mat-form-field appearance="outline" fxFlexFill>
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="Enter email"
+              formControlName="email"
+              required
+            />
+            <i matSuffix class="material-icons">
+              alternate_email
+            </i>
+            <mat-hint>We will not share your email with anyone</mat-hint>
+            <mat-error *ngIf="isSubmitted || f.email.errors">
+              <mat-error *ngIf="f.email.errors?.required">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="f.email.errors?.email">
+                Value has to be a valid email address
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="outline" fxFlexFill>
+            <mat-label>Password</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="Enter password"
+              formControlName="password"
+              required
+            />
+            <i matSuffix class="material-icons">
+              dialpad
+            </i>
+            <mat-hint>Enter your secret key here</mat-hint>
+            <mat-error *ngIf="isSubmitted || f.password.errors">
+              <mat-error *ngIf="f.password.errors?.required">
+                Password is required
+              </mat-error>
+              <mat-error *ngIf="f.password.errors?.minlength">
+                Password must be at least 5 characters
+              </mat-error>
+              <mat-error *ngIf="f.password.errors?.maxlength">
+                Password cannot be more than 18 characters
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+        </p>
+      </mat-card-content>
+      <mat-card-actions fxLayoutAlign="end center">
+        <button mat-raised-button fxFlexFill color="accent" type="submit">
+          LOGIN
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

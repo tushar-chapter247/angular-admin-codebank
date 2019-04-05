@@ -30,3 +30,7 @@ $angular-admin-theme: mat-light-theme($angular-admin-primary, $angular-admin-acc
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.centered {
+  text-align: center;
+}
