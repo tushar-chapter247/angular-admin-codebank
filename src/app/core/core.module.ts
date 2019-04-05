@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from './material/material.module';
 import { CoreRoutingModule } from './core-routing.module';
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CoreRoutingModule } from './core-routing.module';
     BrowserAnimationsModule,
     FlexLayoutModule,
     CoreRoutingModule,
+    MaterialModule,
   ],
 })
 export class CoreModule {}
