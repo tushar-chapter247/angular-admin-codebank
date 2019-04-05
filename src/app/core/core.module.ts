@@ -11,6 +11,7 @@ import { CoreRoutingModule } from './core-routing.module';
 
 // ALL COMPONENTS IMPORTS
 import { LoginComponent } from './components/login/login.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,6 @@ import { LoginComponent } from './components/login/login.component';
     ErrorModule,
     CoreRoutingModule,
   ],
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, ErrorComponent],
 })
 export class CoreModule {}
