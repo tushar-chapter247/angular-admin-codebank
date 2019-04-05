@@ -9,6 +9,7 @@ export class ErrorsHandler implements ErrorHandler {
   constructor(private injector: Injector) {}
 
   handleError(error: Error | HttpErrorResponse) {
+    // Because the ErrorHandler is created before the providers, we’ll have to use the Injector to get them.
     const notificationService = this.injector.get(NotificationService);
     const router = this.injector.get(Router);
 

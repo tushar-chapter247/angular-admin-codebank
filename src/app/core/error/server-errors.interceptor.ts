@@ -4,7 +4,6 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-  HttpResponse,
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -22,6 +21,7 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       retry(5), // retry for five times before sending error response
       catchError((error: HttpErrorResponse) => {
+        // Because the ServerErrorsInterceptor is created before the providers, we’ll have to use the Injector to get them.
         const notificationService = this.injector.get(NotificationService);
 
         let errorMessage = '';
