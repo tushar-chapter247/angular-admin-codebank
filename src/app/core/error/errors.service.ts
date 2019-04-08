@@ -4,15 +4,21 @@ import {
   LocationStrategy,
   PathLocationStrategy,
 } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 // Cool library to deal with errors: https://www.stacktracejs.com
 import * as StackTraceParser from 'error-stack-parser';
 import { Router, NavigationError, Event } from '@angular/router';
+import { CommonService } from '../services/common/common.service';
 
 @Injectable()
 export class ErrorsService {
-  constructor(private location: LocationStrategy, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private location: LocationStrategy,
+    private router: Router,
+    private commonService: CommonService
+  ) {
     // Listen to the navigation errors
     this.router.events.subscribe((event: Event) => {
       // Redirect to the ErrorComponent
@@ -21,11 +27,11 @@ export class ErrorsService {
           return;
         }
         // Redirect to the ErrorComponent (after observable api)
-        // this.log(event.error).subscribe(errorWithContext => {
-        //   this.router.navigate(['/error'], {
-        //     queryParams: errorWithContext,
-        //   });
-        // });
+        this.log(event.error).subscribe(errorWithContext => {
+          this.router.navigate(['/error'], {
+            queryParams: errorWithContext,
+          });
+        });
       }
     });
   }
@@ -35,16 +41,17 @@ export class ErrorsService {
     console.error(error);
     // Send error to server
     const errorToSend = this.addContextInfo(error);
-    // return fakeHttpService.post(errorToSend);
+    // use json server to save json file locally
+    return this.commonService.post('Errors', errorToSend);
   }
 
   addContextInfo(error) {
     // All the context details that you want (usually coming from other services; Constants, UserService...)
     const name = error.name || null;
-    const appId = 'shthppnsApp';
-    const user = 'ShthppnsUser';
+    const appId = 'admin-angular';
+    const user = 'Administrator';
     const time = new Date().getTime();
-    const id = `${appId}-${user}-${time}`;
+    const errorId = `${appId}-${user}-${time}`;
     const url =
       this.location instanceof PathLocationStrategy ? this.location.path() : '';
     const status = error.status || null;
@@ -56,7 +63,7 @@ export class ErrorsService {
       appId,
       user,
       time,
-      id,
+      errorId,
       url,
       status,
       message,

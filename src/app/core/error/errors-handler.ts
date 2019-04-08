@@ -24,7 +24,7 @@ export class ErrorsHandler implements ErrorHandler {
       }
       // Http Error
       // Send the error to the server
-      // errorsService.log(error).subscribe(); // when apply api, open it
+      errorsService.log(error).subscribe();
       // Show notification to the user
       return notificationService.notify(`${error.status} - ${error.message}`);
     } else {
@@ -33,15 +33,14 @@ export class ErrorsHandler implements ErrorHandler {
       // redirect the user to the page with all the info
 
       //  when using api for error
-      //  errorsService
-      //    .log(error)
-      //    .subscribe(errorWithContextInfo => {
-      //      router.navigate(['/error'], {
-      //        queryParams: errorWithContextInfo,
-      //      });
-      //    });
+      errorsService.log(error).subscribe(errorWithContextInfo => {
+        router.navigate(['/error'], {
+          queryParams: errorWithContextInfo,
+        });
+      });
+
       // when not using api
-      router.navigate(['/error'], { queryParams: { error } });
+      // router.navigate(['/error'], { queryParams: { error } });
     }
 
     // Log the error anyway
