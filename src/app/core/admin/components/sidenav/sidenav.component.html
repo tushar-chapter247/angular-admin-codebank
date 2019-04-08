@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-toolbar class="toolbar" color="primary">
+  <mat-toolbar class="mat-elevation-z6 toolbar" color="primary">
     <button
       type="button"
       aria-label="Toggle sidenav"
@@ -23,8 +23,10 @@
     >
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item href="#">Dashboard</a>
-        <a mat-list-item href="#">Users</a>
+        <a mat-list-item [routerLink]="['/', 'admin', 'dashboard']"
+          >Dashboard</a
+        >
+        <a mat-list-item [routerLink]="['/', 'admin', 'users']">Users</a>
         <a mat-list-item href="#">Payment</a>
       </mat-nav-list>
     </mat-sidenav>

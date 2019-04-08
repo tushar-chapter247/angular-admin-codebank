@@ -11,6 +11,7 @@ import { ErrorModule } from '../error/error.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     ErrorModule,
     AdminRoutingModule,
   ],
-  declarations: [SidenavComponent],
+  declarations: [SidenavComponent, UsersComponent],
 })
 export class AdminModule {}
