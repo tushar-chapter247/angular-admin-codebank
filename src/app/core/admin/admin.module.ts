@@ -5,16 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from './material/material.module';
-import { ErrorModule } from './error/error.module';
-import { CoreRoutingModule } from './core-routing.module';
+import { MaterialModule } from '../material/material.module';
+import { LayoutModule } from '@angular/cdk/layout';
+import { ErrorModule } from '../error/error.module';
 
-// ALL COMPONENTS IMPORTS
-import { LoginComponent } from './components/login/login.component';
-import { ErrorComponent } from './components/error/error.component';
-
-// MODULE FOR ADMIN PANEL
-import { AdminModule } from './admin/admin.module';
+import { AdminRoutingModule } from './admin-routing.module';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   imports: [
@@ -25,10 +21,10 @@ import { AdminModule } from './admin/admin.module';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
+    LayoutModule,
     ErrorModule,
-    CoreRoutingModule,
-    AdminModule,
+    AdminRoutingModule,
   ],
-  declarations: [LoginComponent, ErrorComponent],
+  declarations: [SidenavComponent],
 })
-export class CoreModule {}
+export class AdminModule {}

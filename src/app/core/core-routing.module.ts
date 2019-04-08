@@ -9,6 +9,10 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'adminM',
+    loadChildren: './admin/admin.module#AdminModule',
+  },
+  {
     path: 'error',
     component: ErrorComponent,
   },
