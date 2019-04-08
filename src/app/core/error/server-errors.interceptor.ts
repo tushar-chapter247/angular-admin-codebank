@@ -29,11 +29,13 @@ export class ServerErrorsInterceptor implements HttpInterceptor {
         if (error.error instanceof ErrorEvent) {
           // client-side error
           errorMessage = `Error: ${error.error.message}`;
-        } else {
+        } else if (error.status) {
           // server-side error
           errorMessage = `Error Code: ${error.status}\nMessage: ${
             error.message
           }`;
+        } else {
+          errorMessage = `Message: ${error.message}`;
         }
 
         notificationService.notify(errorMessage);

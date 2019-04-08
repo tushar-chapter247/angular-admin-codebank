@@ -1,20 +1,17 @@
-import { ErrorHandler, Injectable } from '@angular/core';
-import {
-  Location,
-  LocationStrategy,
-  PathLocationStrategy,
-} from '@angular/common';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // Cool library to deal with errors: https://www.stacktracejs.com
 import * as StackTraceParser from 'error-stack-parser';
 import { Router, NavigationError, Event } from '@angular/router';
 import { CommonService } from '../services/common/common.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ErrorsService {
   constructor(
-    private http: HttpClient,
     private location: LocationStrategy,
     private router: Router,
     private commonService: CommonService
@@ -41,7 +38,7 @@ export class ErrorsService {
     console.error(error);
     // Send error to server
     const errorToSend = this.addContextInfo(error);
-    // use json server to save json file locally
+    // save error data to server
     return this.commonService.post('Errors', errorToSend);
   }
 

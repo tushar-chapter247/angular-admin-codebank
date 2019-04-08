@@ -34,7 +34,8 @@ export class ErrorsHandler implements ErrorHandler {
 
       //  when using api for error
       errorsService.log(error).subscribe(errorWithContextInfo => {
-        router.navigate(['/error'], {
+        console.log(errorWithContextInfo);
+        router.navigate(['/', 'error'], {
           queryParams: errorWithContextInfo,
         });
       });

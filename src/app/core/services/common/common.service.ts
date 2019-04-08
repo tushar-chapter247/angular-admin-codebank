@@ -5,13 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 
-interface Metadata {
-  key: string;
-  value: any;
-}
-
-interface MetadataObj {
-  [key: string]: Metadata;
+interface IData {
+  [key: string]: any;
 }
 
 @Injectable({
@@ -21,6 +16,11 @@ export class CommonService {
   private API: string = CoreAppSettings.API_ENDPOINT;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
+
+  ping() {
+    console.log('pong');
+    return 'pong';
+  }
 
   // SLUGIFY A STRING
   createSlugFromString(text: string): string {
@@ -58,7 +58,7 @@ export class CommonService {
   }
 
   // CREATE PARAMS URL BY PASSING OBJECT
-  formUrlParam(url: string, data: MetadataObj) {
+  formUrlParam(url: string, data: IData) {
     let queryString = '';
     for (const key in data) {
       if (data.hasOwnProperty(key)) {
@@ -73,7 +73,7 @@ export class CommonService {
   }
 
   // FETCH DATA FROM SERVER USING HTTP GET
-  get(url: string, params?: MetadataObj): Observable<HttpResponse<object>> {
+  get(url: string, params?: IData): Observable<HttpResponse<object>> {
     let endPoint: string;
     if (params) {
       endPoint = this.API + this.formUrlParam(url, params);
@@ -86,14 +86,24 @@ export class CommonService {
   }
 
   // CREATE NEW RECORD ON SERVER BY USING HTTP POST
-  post(url: string, data: any): Observable<any> {
+  post(url: string, data: IData, params?: IData): Observable<any> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8',
-        access_token: localStorage.getItem(CoreAppSettings.authId),
+        access_token: localStorage.getItem(CoreAppSettings.authId)
+          ? localStorage.getItem(CoreAppSettings.authId)
+          : '',
       }),
     };
-    return this.http.post(this.API + url, data, options);
+
+    let endPoint: string;
+    if (params) {
+      endPoint = this.API + this.formUrlParam(url, params);
+    } else {
+      endPoint = this.API + url;
+    }
+
+    return this.http.post(endPoint, data, options);
   }
 
   // BYPASS ANGULAR SECURITY FOR UNTRUSTED URL

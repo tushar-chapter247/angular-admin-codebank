@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../services/notification/notification.service';
+import { CommonService } from '../../services/common/common.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   public isSubmitted = false;
   public loading = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private commonService: CommonService) {}
 
   // INITIALIZE FORM CONTROLS
   async initForm(): Promise<any> {
@@ -41,7 +42,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log('login button pressed!');
+    this.commonService
+      .post('UserAccounts/login', this.loginForm.value, { include: 'user' })
+      .subscribe(
+        res => {
+          console.log('Response for login: ', res);
+        },
+        err => console.log(err)
+      );
     this.isSubmitted = false;
   }
 
