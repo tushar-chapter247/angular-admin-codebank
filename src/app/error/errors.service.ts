@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 // Cool library to deal with errors: https://www.stacktracejs.com
 import * as StackTraceParser from 'error-stack-parser';
 import { Router, NavigationError, Event } from '@angular/router';
-import { CommonService } from '../services/common/common.service';
+import { CommonService } from '../core/services/common/common.service';
 
 @Injectable({
   providedIn: 'root',

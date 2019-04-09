@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as StackTraceParser from 'error-stack-parser';
 
 import { ErrorsService } from './errors.service';
-import { NotificationService } from '../services/notification/notification.service';
+import { NotificationService } from '../core/services/notification/notification.service';
 
 @Injectable()
 export class ErrorsHandler implements ErrorHandler {

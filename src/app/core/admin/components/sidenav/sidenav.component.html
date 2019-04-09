@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [class.is-mobile]="isHandset$ | async">
   <mat-toolbar class="mat-elevation-z6 toolbar" color="primary">
     <button
       type="button"
@@ -15,7 +15,7 @@
     <mat-sidenav
       #drawer
       class="sidenav"
-      fixedInViewport="true"
+      [fixedInViewport]="isHandset$ | async"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)"
@@ -23,9 +23,9 @@
     >
       <mat-toolbar>Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item [routerLink]="['/', 'admin', 'dashboard']"
-          >Dashboard</a
-        >
+        <a mat-list-item [routerLink]="['/', 'admin', 'dashboard']">
+          Dashboard
+        </a>
         <a mat-list-item [routerLink]="['/', 'admin', 'users']">Users</a>
         <a mat-list-item href="#">Payment</a>
       </mat-nav-list>

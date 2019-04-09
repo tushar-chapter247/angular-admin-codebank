@@ -4,8 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ErrorModule } from '../core/error/error.module';
-import { MaterialModule } from '../core/material/material.module';
+import { ErrorModule } from '../error/error.module';
+import { MaterialModule } from '../material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
