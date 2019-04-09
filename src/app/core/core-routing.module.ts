@@ -9,7 +9,7 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'adminM',
+    path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
   },
   {

@@ -5,7 +5,7 @@ import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     component: SidenavComponent,
     children: [
       {
