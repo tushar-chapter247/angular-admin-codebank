@@ -8,6 +8,12 @@
   right: 0;
 }
 
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .sidenav-container {
   flex: 1;
   z-index: 0 !important;
@@ -19,10 +25,4 @@
 
 .sidenav {
   width: 250px;
-}
-
-.toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1;
 }
