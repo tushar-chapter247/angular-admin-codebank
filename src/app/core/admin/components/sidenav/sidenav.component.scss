@@ -26,3 +26,31 @@
 .sidenav {
   width: 250px;
 }
+
+.theme-picker {
+  width: 36px;
+  height: 36px;
+  margin: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.purple-theme {
+  @extend .theme-picker;
+  background: #673ab7;
+}
+
+.indigo-theme {
+  @extend .theme-picker;
+  background: #3f51b5;
+}
+
+.pink-dark-theme {
+  @extend .theme-picker;
+  background: #e92a63;
+}
+
+.purple-dark-theme {
+  @extend .theme-picker;
+  background: #9c27b0;
+}

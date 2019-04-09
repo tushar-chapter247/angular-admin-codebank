@@ -10,6 +10,28 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <span>ADMIN PANEL</span>
+    <span class="flex-spacer"></span>
+    <button mat-icon-button [matMenuTriggerFor]="colorMenu">
+      <mat-icon>format_color_fill</mat-icon>
+    </button>
+    <mat-menu #colorMenu="matMenu">
+      <div style="padding: 10px;">
+        <mat-grid-list cols="2" rowHeight="45px">
+          <mat-grid-tile matRipple>
+            <div class="purple-theme"></div>
+          </mat-grid-tile>
+          <mat-grid-tile matRipple>
+            <div class="indigo-theme"></div>
+          </mat-grid-tile>
+          <mat-grid-tile matRipple>
+            <div class="pink-dark-theme"></div>
+          </mat-grid-tile>
+          <mat-grid-tile matRipple>
+            <div class="purple-dark-theme"></div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-menu>
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container" autosize>
     <mat-sidenav
