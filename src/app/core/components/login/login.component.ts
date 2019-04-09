@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification.service';
 import { CommonService } from '../../services/common/common.service';
 
@@ -14,7 +15,11 @@ export class LoginComponent implements OnInit {
   public isSubmitted = false;
   public loading = false;
 
-  constructor(private fb: FormBuilder, private commonService: CommonService) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private commonService: CommonService
+  ) {}
 
   // INITIALIZE FORM CONTROLS
   async initForm(): Promise<any> {
@@ -38,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   // ON LOGIN BUTTON PRESS, EXECUTE FUNCTION
   async onLogin(): Promise<any> {
+    this.router.navigate(['/', 'admin']);
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
       return;
