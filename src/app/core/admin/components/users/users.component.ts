@@ -2,15 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../../../services/users/users.service';
-
-interface IUserParams {
-  search: string;
-  page: string;
-  status: string;
-  accountType: string;
-  date: string;
-  sort: string;
-}
+import { IUser } from '../../models/user.model';
+import { IUserParams } from '../../models/user-params.model';
 
 @Component({
   selector: 'app-users',
@@ -29,7 +22,19 @@ export class UsersComponent implements OnInit, OnDestroy {
   public selectSort: string;
   public selectedStartDate: Date;
   public selectedEndDate: Date;
-  public userData: any[] = [];
+  public serialNumber = 0;
+  public userData: IUser[] = [];
+  public displayedColumns: string[] = [
+    's.no.',
+    'name',
+    'email',
+    'type',
+    'signupVia',
+    'status',
+    'createdAt',
+    'lastAccessed',
+    // 'actions',
+  ];
   public loading = false;
 
   constructor(
@@ -80,6 +85,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.selectSort = decodeURIComponent(sort);
     this.selectedEndDate = d[1] ? new Date(d[1]) : undefined;
     this.selectedStartDate = d[0] ? new Date(d[0]) : undefined;
+    this.serialNumber = this.limit * (pageNumber - 1) + 1;
 
     const where: any[] = [];
 
@@ -165,12 +171,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.userData = [];
     try {
-      this.userService.fetchUsers(params).subscribe((res: any[]) => {
+      this.userService.fetchUsers(params).subscribe((res: IUser[]) => {
         this.userData = [...res];
       });
     } catch (error) {
       this.loading = true;
-      this.userData = [];
     }
   }
 

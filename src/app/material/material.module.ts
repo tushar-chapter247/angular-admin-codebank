@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRippleModule } from '@angular/material/core';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [],
@@ -41,6 +42,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatListModule,
     MatGridListModule,
     MatRippleModule,
+    MatTableModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -60,6 +62,7 @@ import { MatRippleModule } from '@angular/material/core';
     MatListModule,
     MatGridListModule,
     MatRippleModule,
+    MatTableModule,
   ],
 })
 export class MaterialModule {}
