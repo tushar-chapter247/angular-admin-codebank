@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
 
   // ON LOGIN BUTTON PRESS, EXECUTE FUNCTION
   async onLogin(): Promise<any> {
-    this.router.navigate(['/', 'admin']);
     this.isSubmitted = true;
     if (!this.loginForm.valid) {
       return;
@@ -54,6 +53,9 @@ export class LoginComponent implements OnInit {
       .subscribe(
         res => {
           console.log('Response for login: ', res);
+          if (res.id && res.userId) {
+            this.router.navigate(['/', 'admin']);
+          }
         },
         err => console.log(err)
       );

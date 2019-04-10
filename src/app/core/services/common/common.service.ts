@@ -91,11 +91,11 @@ export class CommonService {
     };
 
     let endPoint: string;
-    if (params) {
-      endPoint = this.API + this.formUrlParam(url, params);
-    } else {
-      endPoint = this.API + url;
-    }
+    params
+      ? Object.entries(params).length === 0 && params.constructor === Object
+        ? (endPoint = this.API + url)
+        : (endPoint = this.API + this.formUrlParam(url, params))
+      : (endPoint = this.API + url);
 
     return this.http.post(endPoint, data, options);
   }
