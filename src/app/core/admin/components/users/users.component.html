@@ -15,8 +15,145 @@
 
   <br />
 
-  <mat-card>
-    <mat-card-content>
+  <div class="head-container2 mat-elevation-z6">
+    <form
+      (ngSubmit)="onApplyFilters()"
+      fxLayout="row wrap"
+      fxLayoutAlign="start center"
+      fxLayoutGap="6px"
+      novalidate
+    >
+      <mat-form-field
+        class="bottomPadding0"
+        floatLabel="always"
+        appearance="outline"
+        fxFlex.sm="100"
+        fxFlex.xs="100"
+      >
+        <mat-label>Search</mat-label>
+        <input
+          matInput
+          placeholder="Search user by name, id"
+          [value]="searchValue"
+          (input)="searchValue = $event.target.value"
+        />
+      </mat-form-field>
+
+      <mat-form-field
+        class="bottomPadding0"
+        appearance="outline"
+        fxFlex.lg="10"
+        fxFlex.md="10"
+        fxFlex.sm="100"
+        fxFlex.xs="100"
+      >
+        <mat-label>Account type</mat-label>
+        <mat-select [(value)]="userAccountType">
+          <mat-option value="">All</mat-option>
+          <mat-option value="normal">Normal</mat-option>
+          <mat-option value="plus">Plus</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        class="bottomPadding0"
+        appearance="outline"
+        fxFlex.lg="10"
+        fxFlex.md="10"
+        fxFlex.sm="100"
+        fxFlex.xs="100"
+      >
+        <mat-label>Status</mat-label>
+        <mat-select [(value)]="userStatus">
+          <mat-option value="">All</mat-option>
+          <mat-option value="active">Active</mat-option>
+          <mat-option value="inactive">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        class="bottomPadding0"
+        floatLabel="always"
+        appearance="outline"
+        fxFlex.lg="10"
+        fxFlex.md="10"
+        fxFlex.sm="40"
+        fxFlex.xs="40"
+      >
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="sd"
+          placeholder="Select date"
+          [formControl]="selectedStartDate"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="sd"></mat-datepicker-toggle>
+        <mat-datepicker #sd></mat-datepicker>
+      </mat-form-field>
+
+      <span>TO</span>
+
+      <mat-form-field
+        class="bottomPadding0"
+        floatLabel="always"
+        appearance="outline"
+        fxFlex.lg="10"
+        fxFlex.md="10"
+        fxFlex.sm="40"
+        fxFlex.xs="40"
+      >
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="ed"
+          placeholder="Select date"
+          [formControl]="selectedEndDate"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="ed"></mat-datepicker-toggle>
+        <mat-datepicker #ed></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field
+        class="bottomPadding0"
+        appearance="outline"
+        fxFlex.lg="10"
+        fxFlex.md="10"
+        fxFlex.sm="100"
+        fxFlex.xs="100"
+      >
+        <mat-label>Sort</mat-label>
+        <mat-select [(value)]="selectSort">
+          <mat-option value="name ASC">Name A-Z</mat-option>
+          <mat-option value="name DESC">Name Z-A</mat-option>
+          <mat-option value="createdAt DESC">New</mat-option>
+          <mat-option value="createdAt ASC">Old</mat-option>
+          <mat-option value="lastAccessed DESC">Last login</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="onResetFilters()"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </form>
+  </div>
+
+  <br />
+
+  <div class="main-table-container mat-elevation-z6">
+    <div class="loading-shade" *ngIf="loading">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
+    <div class="table-container">
       <table mat-table [dataSource]="userData" class="mat-elevation-z6">
         <!-- Serial number -->
         <ng-container matColumnDef="s.no.">
@@ -79,6 +216,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-    </mat-card-content>
-  </mat-card>
+    </div>
+  </div>
 </div>

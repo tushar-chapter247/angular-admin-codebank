@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { UsersService } from '../../../services/users/users.service';
 import { IUser } from '../../models/user.model';
 import { IUserParams } from '../../models/user-params.model';
+import * as moment from 'moment';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -20,8 +22,8 @@ export class UsersComponent implements OnInit, OnDestroy {
   public userStatus: string;
   public userAccountType: string;
   public selectSort: string;
-  public selectedStartDate: Date;
-  public selectedEndDate: Date;
+  public selectedStartDate: FormControl = new FormControl(moment());
+  public selectedEndDate: FormControl = new FormControl(moment());
   public serialNumber = 0;
   public userData: IUser[] = [];
   public displayedColumns: string[] = [
@@ -83,8 +85,8 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.userStatus = status;
     this.userAccountType = accountType;
     this.selectSort = decodeURIComponent(sort);
-    this.selectedEndDate = d[1] ? new Date(d[1]) : undefined;
-    this.selectedStartDate = d[0] ? new Date(d[0]) : undefined;
+    this.selectedEndDate.setValue(d[1] ? moment(d[1]) : undefined);
+    this.selectedStartDate.setValue(d[0] ? moment(d[0]) : undefined);
     this.serialNumber = this.limit * (pageNumber - 1) + 1;
 
     const where: any[] = [];
@@ -114,28 +116,28 @@ export class UsersComponent implements OnInit, OnDestroy {
       });
     }
 
-    if (this.selectedStartDate && this.selectedEndDate) {
+    if (this.selectedStartDate.value && this.selectedEndDate.value) {
       const dateFilter = {
         createdAt: {
-          between: [this.selectedStartDate, this.selectedEndDate],
+          between: [this.selectedStartDate.value, this.selectedEndDate.value],
         },
       };
       where.push(dateFilter);
     }
 
-    if (this.selectedStartDate && !this.selectedEndDate) {
+    if (this.selectedStartDate.value && !this.selectedEndDate.value) {
       const dateFilter = {
         createdAt: {
-          gte: this.selectedStartDate,
+          gte: this.selectedStartDate.value,
         },
       };
       where.push(dateFilter);
     }
 
-    if (!this.selectedStartDate && this.selectedEndDate) {
+    if (!this.selectedStartDate.value && this.selectedEndDate.value) {
       const dateFilter = {
         createdAt: {
-          gte: this.selectedEndDate,
+          gte: this.selectedEndDate.value,
         },
       };
       where.push(dateFilter);
@@ -173,10 +175,34 @@ export class UsersComponent implements OnInit, OnDestroy {
     try {
       this.userService.fetchUsers(params).subscribe((res: IUser[]) => {
         this.userData = [...res];
+        this.loading = false;
       });
     } catch (error) {
-      this.loading = true;
+      this.loading = false;
     }
+  }
+
+  async onApplyFilters() {
+    this.router.navigate(['/admin/users'], {
+      queryParams: {
+        search: this.searchValue,
+        status: this.userStatus,
+        accountType: this.userAccountType,
+        sort: this.selectSort,
+        date: [
+          this.selectedStartDate.value
+            ? moment(this.selectedStartDate.value).format('YYYY-MM-DD')
+            : '',
+          this.selectedEndDate.value
+            ? moment(this.selectedEndDate.value).format('YYYY-MM-DD')
+            : '',
+        ].join('to'),
+      },
+    });
+  }
+
+  async onResetFilters() {
+    this.router.navigate(['/admin/users']);
   }
 
   async ngOnInit() {

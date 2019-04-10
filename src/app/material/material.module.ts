@@ -12,14 +12,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatRippleModule } from '@angular/material/core';
+import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [],
@@ -35,6 +37,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSnackBarModule,
     MatTooltipModule,
@@ -42,7 +45,9 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatGridListModule,
     MatRippleModule,
+    MatNativeDateModule,
     MatTableModule,
+    MatMomentDateModule,
   ],
   exports: [
     MatCheckboxModule,
@@ -55,6 +60,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     MatProgressBarModule,
     MatSnackBarModule,
     MatTooltipModule,
@@ -62,7 +68,9 @@ import { MatTableModule } from '@angular/material/table';
     MatListModule,
     MatGridListModule,
     MatRippleModule,
+    MatNativeDateModule,
     MatTableModule,
+    MatMomentDateModule,
   ],
 })
 export class MaterialModule {}
