@@ -6,6 +6,7 @@ import { IUser } from '../../models/user.model';
 import { IUserParams } from '../../models/user-params.model';
 import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -15,7 +16,6 @@ import { FormControl } from '@angular/forms';
 export class UsersComponent implements OnInit, OnDestroy {
   public route$: Subscription;
   public accessToken: string;
-  public totalRecords = 0;
   public limit = 25;
   public pageNumber: number;
   public searchValue: string;
@@ -38,6 +38,15 @@ export class UsersComponent implements OnInit, OnDestroy {
     // 'actions',
   ];
   public loading = false;
+
+  // MatPaginator Inputs
+  public totalRecords = 0; // TOTAL RECORDS COUNT
+  public pageIndex = 0; // CURRENT PAGE NUMBER
+  public pageSize = this.limit; // TOTAL NUMBER OF RECORDS TO SHOW
+  public pageSizeOptions: number[] = [5, 10, 25, 100]; // PAGE SIZE OPTIONS
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
 
   constructor(
     private router: Router,
@@ -203,6 +212,10 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   async onResetFilters() {
     this.router.navigate(['/admin/users']);
+  }
+
+  async onPaginateChange(e: Event) {
+    console.log(e);
   }
 
   async ngOnInit() {

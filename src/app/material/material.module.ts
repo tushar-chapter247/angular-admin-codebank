@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRippleModule, MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
@@ -47,6 +48,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatRippleModule,
     MatNativeDateModule,
     MatTableModule,
+    MatPaginatorModule,
     MatMomentDateModule,
   ],
   exports: [
@@ -70,6 +72,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     MatRippleModule,
     MatNativeDateModule,
     MatTableModule,
+    MatPaginatorModule,
     MatMomentDateModule,
   ],
 })
