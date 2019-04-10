@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CoreAppSettings } from '../../core.settings';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 
 interface IData {
@@ -16,11 +15,6 @@ export class CommonService {
   private API: string = CoreAppSettings.API_ENDPOINT;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {}
-
-  ping() {
-    console.log('pong');
-    return 'pong';
-  }
 
   // SLUGIFY A STRING
   createSlugFromString(text: string): string {

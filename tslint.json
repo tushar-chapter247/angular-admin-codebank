@@ -46,6 +46,17 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "no-default-export": true,
+    "no-implicit-dependencies": [true],
+    "no-submodule-imports": false,
+    "no-relative-imports": true,
+    "export-name": false,
+    "no-import-side-effect": [
+      true,
+      {
+        "ignore-module": "(\\.css)$"
+      }
+    ]
   }
 }
