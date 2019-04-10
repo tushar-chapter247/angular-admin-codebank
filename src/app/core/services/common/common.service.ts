@@ -69,11 +69,11 @@ export class CommonService {
   // FETCH DATA FROM SERVER USING HTTP GET
   get(url: string, params?: IData): Observable<HttpResponse<object>> {
     let endPoint: string;
-    if (params) {
-      endPoint = this.API + this.formUrlParam(url, params);
-    } else {
-      endPoint = this.API + url;
-    }
+    params
+      ? Object.entries(params).length === 0 && params.constructor === Object
+        ? (endPoint = this.API + url)
+        : (endPoint = this.API + this.formUrlParam(url, params))
+      : (endPoint = this.API + url);
 
     // Default 'body' of response, get full response using observe
     return this.http.get(endPoint, { observe: 'response' });
